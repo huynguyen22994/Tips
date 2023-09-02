@@ -63,13 +63,62 @@ Read more and using Stream here: https://devhints.io/nodejs-stream
 
 ![](/NodeJS-V8/images/event-loop-1.webp)
 
+### Kiểu dữ liệu - HEAP & Stack
+
+#### Kiểu dữ liệu
+- Trong JavaScript, có hai loại kiểu dữ liệu chính là kiểu dữ liệu nguyên thủy (primitive data types) và kiểu dữ liệu tham chiếu (reference data types).
+    1. Kiểu dữ liệu nguyên thủy (primitive data types):
+        - Number, String, Boolean, Null, Undefined, Symbol
+    2. Kiểu dữ liệu tham chiếu (reference data types):
+        - Object, Array, Function, Date, RegExp, Error
+- `Kiểu dữ liệu nguyên thủy` được lưu trữ trực tiếp trong vùng nhớ được gọi là Stack
+- `Kiểu dữ liệu tham chiếu` chỉ lưu trữ tham chiếu đến vùng nhớ của đối tượng thực sự, được gọi là Heap. Khi bạn gán một biến kiểu dữ liệu tham chiếu cho một biến khác, thực chất bạn đang gán tham chiếu đến cùng một đối tượng, không phải là tạo ra một bản sao mới.
+
+Ví dụ
+```
+// Kiểu dữ liệu nguyên thủy
+let num = 10;
+let str = "Hello";
+let bool = true;
+
+// Kiểu dữ liệu tham chiếu
+let obj = { name: "John", age: 25 };
+let arr = [1, 2, 3];
+let func = function() {
+  console.log("Hello");
+};
+```
+
+(*) Khi làm việc với kiểu dữ liệu tham chiếu, cần lưu ý rằng việc thay đổi giá trị của một biến có thể ảnh hưởng đến các biến khác cùng tham chiếu đến đối tượng đó. Điều này không xảy ra với kiểu dữ liệu nguyên thủy vì chúng được lưu trữ trực tiếp trong Stack.
+
 ### HEAP
+- Heap là nơi lưu trữ các đối tượng dữ liệu có kích thước lớn và tồn tại trong suốt quá trình chạy của ứng dụng. Khi bạn tạo một đối tượng mới trong Node.js, bộ nhớ được cấp phát từ Heap để lưu trữ đối tượng đó. Các đối tượng đó sẽ tồn tại cho đến khi không còn tham chiếu nào đến chúng và bộ thu gom rác sẽ giải phóng bộ nhớ không còn sử dụng.
+
+### Stack
+- Stack là nơi lưu trữ các biến cục bộ, các tham số và các thông tin về hàm.
+- Khi một hàm được gọi trong Node.js, frame của hàm đó được đưa vào Stack, bao gồm các biến cục bộ và các thông tin khác liên quan đến hàm đó. Khi hàm kết thúc, frame của hàm đó được loại bỏ khỏi Stack.
+- Stack trong Node.js có kích thước cố định và được quản lý bởi trình biên dịch JavaScript.
+
 ![](/NodeJS-V8/images/heap-runtime.png)
 
 ### Queue - Micro Task and Macro Task
+
+#### Queue
+- Queue (hàng đợi) là một cấu trúc dữ liệu cho phép lưu trữ và quản lý các phần tử theo cơ chế "First-In-First-Out" (FIFO).
+
+#### Micro Task
+- Micro Task: Micro Task là các tác vụ nhỏ, được thực thi sau khi event loop hoàn thành việc thực thi hiện tại, trước khi tiếp tục thực hiện các Macro Task tiếp theo. Các Micro Task thường bao gồm các hàm callback của Promise, process.nextTick, và queueMicrotask. Các Micro Task được ưu tiên thực thi trước Macro Task.
+
+#### Macro Task
+- Macro Task: Macro Task là các tác vụ lớn hơn, được thực thi trong một vòng lặp event loop riêng. Macro Task bao gồm các tác vụ như I/O operations (đọc/ghi file), timer (setTimeout, setInterval), requestAnimationFrame, và các callback của các thư viện như setTimeout hoặc setInterval. Các Macro Task thường được lên lịch để thực thi sau khi các Micro Task đã được thực thi xong.
+
 ![](/NodeJS-V8/images/microtask-and-macrotask-in-javascript.webp)
 
 ### Call Stack
+
+- Call Stack (ngăn xếp gọi) trong Node.js là một cấu trúc dữ liệu dạng ngăn xếp (stack) được sử dụng để theo dõi và quản lý các hàm (functions) đang được thực thi trong quá trình thực thi chương trình.
+
+- Khi một hàm được gọi, nó sẽ được đẩy (push) vào đỉnh của Call Stack. Khi một hàm hoàn thành việc thực thi, nó sẽ được loại bỏ (pop) khỏi đỉnh của Call Stack. Call Stack hoạt động theo nguyên tắc "Last-In-First-Out" (LIFO), nghĩa là hàm cuối cùng được đẩy vào sẽ được thực thi trước.
 
 ![](/NodeJS-V8/images/event-loop-2.gif)
 ![](/NodeJS-V8/images/event-loop-3.gif)
@@ -77,5 +126,5 @@ Read more and using Stream here: https://devhints.io/nodejs-stream
 ![](/NodeJS-V8/images/event-loop-5.gif)
 ![](/NodeJS-V8/images/event-loop-6.gif)
 
-### Sumary
+### Sumary Call Stack
 ![](/NodeJS-V8/images/event-loop-7.gif)
