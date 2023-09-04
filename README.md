@@ -20,3 +20,11 @@
     - Mã hóa bất đối xứng (Asymmetric encryption) - (RSA, ECDSA)
 
 - Link: https://github.com/huynguyen22994/Tips/blob/main/Symmetric-Asymmetric/README.md
+
+## Khóa Bi Quan - Khóa Lạc Quan
+- Folder: OptimisticLocking-PessimisticLocking
+    - Khóa lạc quan và khóa bi quan là gì?
+    - Kỹ thuật này dùng để làm gì?
+    - Vấn đề thực tế trong hệ thống
+    - Khóa bi quan (Pessimistic lock)
+    - Khóa lạc quan (Optimistic lock)
