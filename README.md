@@ -35,3 +35,17 @@
         - 1. Intersection Observer API
         - 2. The new (HTML) approach
         - 3. Event listeners
+
+## Những kỹ thuật dùng để tối ưu hiệu suất của FrontEnd một website
+- Folder: [FE]-Optimize-FE-Performance
+    - 1. Minification
+    - 2. Compression
+    - 3. Caching
+    - 4. Lazy loading
+    - 5. Asynchronous loading
+    - 6. Sprite và icon font
+    - 7. Critical CSS
+    - 8. Code splitting
+    - 9. Image optimization
+    - 10. Performance monitoring: Google PageSpeed Insights, Lighthouse hoặc WebPageTest 
+
