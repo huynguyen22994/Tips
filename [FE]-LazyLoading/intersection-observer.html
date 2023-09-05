@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intersection Observer</title>
+    <style>
+        div.block-1 {
+            width: '100%';
+            height: 400px;
+            background-color: aqua;
+        }
+        div.block-2 {
+            width: '100%';
+            height: 400px;
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div class="block-1"></div>
+    <div class="block-2"></div>
+
+    <div class="lazy-image">
+        <img src="https://i.pinimg.com/236x/b7/f8/33/b7f833e1b897487c93a1e63d37621a02.jpg" lazy-src="https://i.pinimg.com/236x/dc/b4/6d/dcb46d6e58acfedf7aabaaa3af922258.jpg" alt="">
+        <img src="https://i.pinimg.com/236x/b7/f8/33/b7f833e1b897487c93a1e63d37621a02.jpg" lazy-src="https://i.pinimg.com/236x/31/be/ce/31bece362c04b2456e40de6933bb14cd.jpg" alt="">
+        <img src="https://i.pinimg.com/236x/b7/f8/33/b7f833e1b897487c93a1e63d37621a02.jpg" lazy-src="https://i.pinimg.com/236x/d2/71/04/d2710400da3c7a8cd836e5fcbd375ac5.jpg" alt="">
+        <img src="https://i.pinimg.com/236x/b7/f8/33/b7f833e1b897487c93a1e63d37621a02.jpg" lazy-src="https://i.pinimg.com/236x/5e/4a/5b/5e4a5b66dacf6a3dbded70dd4186fccf.jpg" alt="">
+        <img src="https://i.pinimg.com/236x/b7/f8/33/b7f833e1b897487c93a1e63d37621a02.jpg" lazy-src="https://i.pinimg.com/236x/8f/90/b0/8f90b0f88352e00452db77fa4c0eb4cc.jpg" alt="">
+        <img src="https://i.pinimg.com/236x/b7/f8/33/b7f833e1b897487c93a1e63d37621a02.jpg" lazy-src="https://i.pinimg.com/236x/8f/90/b0/8f90b0f88352e00452db77fa4c0eb4cc.jpg" alt="">
+    </div>
+
+    <div class="block-1"></div>
+    <div class="block-2"></div>
+    <div class="block-1"></div>
+    <div class="block-2"></div>
+    <script>
+        const loaded = (event) => {
+            if('IntersectionObserver' in window) {
+                const lazyImage = document.querySelectorAll('.lazy-image [lazy-src]');
+                const loadImage = (element) => {
+                    const lazyImage = element.getAttribute('lazy-src')
+                    if(!lazyImage) return
+                    element.setAttribute('src', lazyImage)
+                    element.removeAttribute('lazy-src')
+                }
+                // Tạo một Intersection Observer instance
+                const observer = new IntersectionObserver((entries, observer) => {
+                    /*
+                        Dử liệu Entries kiểu:
+                        [
+                            boundingClientRect: DOMRectReadOnly {x: 8, y: 796, width: 236, height: 708, top: 796, …}
+                            intersectionRatio: 0.010169491171836853
+                            intersectionRect: DOMRectReadOnly {x: 8, y: 796, width: 236, height: 7.203125, top: 796, …}
+                            isIntersecting: true
+                            isVisible: false
+                            rootBounds: DOMRectReadOnly {x: 0, y: 0, width: 764.8125, height: 803.203125, top: 0, …}
+                            target: img
+                            time: 28154.299999952316
+                        ]
+                    */
+                    /*
+                        Dử liệu observer
+                        {
+                            delay: 0
+                            root: null
+                            rootMargin: "0px 0px 0px 0px"
+                            thresholds: [0]
+                            trackVisibility: false
+                        }
+                    */
+
+                    entries.forEach((entry) => {
+                        if(entry.isIntersecting) loadImage(entry.target)
+                    })
+
+                });
+                // Loop tất cả phần tử image có lazy và add vào observer để quan sát
+                lazyImage.forEach((ele) => {
+                    // Truyền element vào obs để xử lý replace thuộc tính src
+                    observer.observe(ele)
+                })
+            } else {
+                // Using diff way use resize and orientationChange events 
+                // https://dev.to/pfacklam/native-lazy-loading-of-images-with-zero-javascript-3hnf
+            }
+        }
+        document.addEventListener("DOMContentLoaded", loaded);
+    </script>
+</body>
+</html>

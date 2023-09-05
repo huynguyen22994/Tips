@@ -28,3 +28,10 @@
     - Vấn đề thực tế trong hệ thống
     - Khóa bi quan (Pessimistic lock)
     - Khóa lạc quan (Optimistic lock)
+
+## Kỹ Thuật Lazy-Loading [FrontEnd]
+- Folder: [FE]-LazyLoading
+    - 3 cách tiếp cận để implement lazy loading với JS
+        - 1. Intersection Observer API
+        - 2. The new (HTML) approach
+        - 3. Event listeners
