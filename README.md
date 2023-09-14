@@ -53,3 +53,9 @@
 - Folder: Hmac
     - 1. HMAC là gì?    
     - 2. Triển khai code
+
+## Load Balancer
+- Folder: Load Balancer
+    - 1. Cách kỹ thuật và thuật toán của Load Balancing
+    - 2. Load Balancing và Api Gateway
+    - 3. Code triển khai ví dụ load balancing với nodejs dùng kỹ thuật Round-Robin

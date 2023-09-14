@@ -18,3 +18,6 @@ HMAC được sử dụng trong nhiều ứng dụng bảo mật như xác thự
 
 Test
 ![](./images/hmac-result.png)
+
+# Để tăng tính bảo mật cho API
+ Để tăng tính bảo mật cho api trong Hmac có thể kết hợp kỹ thuật nounce + timestamp + khóa bí mật (trong authen)
