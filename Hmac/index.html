@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Hello
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // Add a request interceptor
+        const instance = axios.create({
+            baseURL: 'http://localhost:3000',
+            headers: {
+                'content-type': "application/json; charset=utf-8"
+            }
+        });
+        instance.interceptors.request.use(function (config) {
+            // Do something before request is sent
+            const data = config?.data
+            const signByte = CryptoJS.HmacSHA256(JSON.stringify(data), '123')
+            const clientSign = CryptoJS.enc.Hex.stringify(signByte)
+            config.headers['x-hmac-sign'] = clientSign;
+            return config;
+        }, function (error) {
+            // Do something with request error
+            return Promise.reject(error);
+        });
+
+        instance.post('/api', {
+            "firstName": "Fred",
+            "lastName": "Flintstone"
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    </script>
+</body>
+</html>

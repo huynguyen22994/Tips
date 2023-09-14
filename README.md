@@ -49,3 +49,7 @@
     - 9. Image optimization
     - 10. Performance monitoring: Google PageSpeed Insights, Lighthouse hoặc WebPageTest 
 
+## Kỹ thuật HMAC
+- Folder: Hmac
+    - 1. HMAC là gì?    
+    - 2. Triển khai code

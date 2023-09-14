@@ -1,0 +1,15 @@
+{
+  "name": "hmac",
+  "version": "1.0.0",
+  "description": "HMAC (Hash-based Message Authentication Code) là một thuật toán mã hóa thông điệp dựa trên hàm băm (hash function) và khóa bí mật (secret key). Nó được sử dụng để xác thực tính toàn vẹn và nguồn gốc của một thông điệp.",
+  "main": "hmac.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
