@@ -59,3 +59,6 @@
     - 1. Cách kỹ thuật và thuật toán của Load Balancing
     - 2. Load Balancing và Api Gateway
     - 3. Code triển khai ví dụ load balancing với nodejs dùng kỹ thuật Round-Robin
+
+## 8 Giải pháp bảo vệ dữ liệu API
+- Foler: Security-API
