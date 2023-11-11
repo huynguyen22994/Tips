@@ -26,6 +26,14 @@
 - NodeJs handle concurrency request throught event-driven and non-blocking I/O.
 
 ### Explain the concept of event-driven programming in Node.js.
+- Event driven propramming in Nodejs is propraming paradigm that focus on handling events and. In Nodejs, event driven programming is a center role in Node Architecture and it alloww for efficient handling of concurrent request and I/O operations.
+- Here's how event-driven programming works in Node.js:
+1. Events
+2. Event emmit
+3. Event listener
+4. Event loop
+5. Asynchoronuos
+6. Callback
 
 
 ### How does error handling work in Node.js?
@@ -48,3 +56,4 @@
 ### How can you monitor and debug Node.js applications?
 
 ### What is the purpose of the "exports" object in Node.js?
+- in Nodejs, the "export" object is a special object that is used to define and expose functions, object and values from a module to other module that require it. It provide a way to encapsulate and share functionally between modules in a modules and resualble code.
